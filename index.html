@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Miraj Shafek | Home</title>
     <link rel="icon" type="image/jpeg" href="/chad2.png">
     <style>
-        /* Base styles */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
         body {
-            background-color: #181818;
+            background-color: #0a0a0a;
             color: #fff;
             font-family: 'Inter', Arial, sans-serif;
             margin: 0;
@@ -16,6 +17,7 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            line-height: 1.6;
         }
 
         .container {
@@ -25,13 +27,12 @@
             flex-grow: 1;
         }
 
-        /* Header styles */
         .header-container {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            background-color: rgba(24, 24, 24, 0.95);
+            background-color: rgba(10, 10, 10, 0.95);
             padding: 20px;
             backdrop-filter: blur(10px);
             z-index: 1000;
@@ -50,17 +51,14 @@
             font-size: 24px;
             font-weight: bold;
             color: #ff0055;
-            cursor: pointer;
-            transition: all 0.3s ease-in-out;
             text-decoration: none;
+            transition: all 0.3s ease;
         }
 
         .logo:hover {
             text-shadow: 0 0 20px rgba(255, 0, 85, 0.5);
-            transform: scale(1.05);
         }
 
-        /* Navigation styles */
         .nav-links {
             display: flex;
             gap: 30px;
@@ -72,17 +70,18 @@
             font-size: 16px;
             position: relative;
             padding: 5px 0;
+            transition: color 0.3s ease;
         }
 
         .nav-links a::after {
             content: '';
             position: absolute;
-            bottom: 0;
+            bottom: -2px;
             left: 0;
             width: 0;
             height: 2px;
             background-color: #ff0055;
-            transition: width 0.3s ease-in-out;
+            transition: width 0.3s ease;
         }
 
         .nav-links a:hover {
@@ -93,10 +92,18 @@
             width: 100%;
         }
 
-        /* Main content styles */
         .main-content {
-            margin-top: 180px;
+            margin-top: 120px;
             text-align: center;
+            padding: 60px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .intro-section {
+            max-width: 800px;
         }
 
         .title {
@@ -106,104 +113,116 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 1s ease-out forwards;
+            margin-bottom: 30px;
+            line-height: 1.2;
+            animation: fadeIn 1s ease-out;
         }
 
         .subtitle {
             font-size: 24px;
             color: #ccc;
-            margin-top: 20px;
             max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.6;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 1.5s ease-out forwards;
+            margin: 0 auto;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .interests {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .interest-item {
+            background: rgba(255, 0, 85, 0.05);
+            padding: 30px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 0, 85, 0.1);
+        }
+
+        .interest-item:hover {
+            background: rgba(255, 0, 85, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .interest-item h3 {
+            color: #ff0055;
+            margin: 0 0 15px 0;
+            font-size: 20px;
+        }
+
+        .interest-item p {
+            color: #aaa;
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .quote-section {
+            margin: 40px 0;
         }
 
         .quote {
-            font-size: 20px;
+            font-size: 28px;
             color: #ff0055;
-            margin-top: 40px;
             font-style: italic;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 2s ease-out forwards;
             position: relative;
             display: inline-block;
+            padding: 0 40px;
+            animation: fadeIn 2s ease-out;
         }
 
         .quote::before, .quote::after {
             content: '"';
             position: absolute;
-            font-size: 32px;
+            font-size: 48px;
             opacity: 0.5;
-        }
-
-        .quote::before {
-            left: -20px;
             top: -10px;
         }
 
-        .quote::after {
-            right: -20px;
-            bottom: -10px;
+        .quote::before {
+            left: 0;
         }
 
-        /* Footer styles */
+        .quote::after {
+            right: 0;
+        }
+
         .footer {
-            margin-top: 100px;
+            margin-top: auto;
             padding: 40px 0;
-            text-align: center;
-            background-color: rgba(255, 255, 255, 0.05);
+            background-color: rgba(255, 255, 255, 0.02);
         }
 
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 30px;
-            margin-bottom: 20px;
+            gap: 20px;
+            flex-wrap: wrap;
         }
 
         .social-links a {
             color: #aaa;
             text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            transition: all 0.3s ease-in-out;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .social-links a::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(255, 0, 85, 0.1);
-            transform: translateX(-100%);
-            transition: transform 0.3s ease-in-out;
-            z-index: -1;
+            padding: 12px 24px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+            font-size: 15px;
         }
 
         .social-links a:hover {
             color: #fff;
+            background: rgba(255, 0, 85, 0.2);
+            transform: translateY(-2px);
         }
 
-        .social-links a:hover::before {
-            transform: translateX(0);
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
+        @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(10px);
             }
             to {
                 opacity: 1;
@@ -211,7 +230,6 @@
             }
         }
 
-        /* Responsive design */
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
@@ -224,7 +242,7 @@
             }
 
             .title {
-                font-size: 48px;
+                font-size: 40px;
             }
 
             .subtitle {
@@ -232,8 +250,14 @@
                 padding: 0 20px;
             }
 
-            .social-links {
-                flex-wrap: wrap;
+            .interests {
+                grid-template-columns: 1fr;
+                padding: 0 20px;
+            }
+
+            .quote {
+                font-size: 24px;
+                padding: 0 30px;
             }
         }
     </style>
@@ -253,9 +277,33 @@
 
     <div class="container">
         <main class="main-content">
-            <h1 class="title">Miraj Shafek</h1>
-            <p class="subtitle">I like to make things fly, swim, go to space, and walk the earth</p>
-            <p class="quote">Machines are Better</p>
+            <section class="intro-section">
+                <h1 class="title">Miraj Shafek</h1>
+                <p class="subtitle">I like to make things fly, swim, go to space, and walk the earth</p>
+            </section>
+
+            <div class="interests">
+                <div class="interest-item">
+                    <h3>Public Health</h3>
+                    <p>With a passion for public health, I've researched in organizations like Statice Health and now contribute to MedVisual, enhancing healthcare accessibility and innovation.</p>
+                </div>
+                <div class="interest-item">
+                    <h3>Development</h3>
+                    <p>I'm skilled in Python, machine learning, and computer vision. I won an international hackathon and co-founded MedVisual, a health-tech startup.</p>
+                </div>
+                <div class="interest-item">
+                    <h3>Debate</h3>
+                    <p>I've won various debating competitions and mentored young debaters, sharing my passion for critical thinking and argumentation.</p>
+                </div>
+                <div class="interest-item">
+                    <h3>Robotics</h3>
+                    <p>I've won and participated in various national and international robotics competitions—I just love making cool machines!</p>
+                </div>
+            </div>
+
+            <div class="quote-section">
+                <p class="quote">Machines are Better</p>
+            </div>
         </main>
     </div>
 

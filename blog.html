@@ -110,6 +110,8 @@
             color: transparent;
             margin-bottom: 50px;
             grid-column: 1 / -1;
+            opacity: 0; /* Initially hidden */
+            animation: fadeInUp 1s ease-out 0.5s forwards; /* Animation */
         }
 
         .blog-posts {
@@ -126,6 +128,8 @@
             cursor: pointer;
             position: relative;
             overflow: hidden;
+            opacity: 0; /* Initially hidden */
+            animation: fadeInUp 1s ease-out forwards; /* Animation */
         }
 
         .blog-post:hover {
@@ -181,6 +185,8 @@
             position: sticky;
             top: 120px;
             height: fit-content;
+            opacity: 0; /* Initially hidden */
+            animation: fadeInUp 1s ease-out 1s forwards; /* Animation */
         }
 
         .search-box {
@@ -231,6 +237,8 @@
             padding: 40px 0;
             text-align: center;
             background-color: rgba(255, 255, 255, 0.05);
+            opacity: 0; /* Initially hidden */
+            animation: fadeInUp 1s ease-out 1.2s forwards; /* Animation */
         }
 
         .social-links {
@@ -269,6 +277,18 @@
 
         .social-links a:hover::before {
             transform: translateX(0);
+        }
+
+        /* Animation keyframes */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Responsive design */
@@ -321,7 +341,7 @@
             <h1 class="blog-title">Blog</h1>
 
             <div class="blog-posts">
-                <article class="blog-post">
+                <article class="blog-post" style="animation-delay: 0.6s;">
                     <div class="post-date">February 15, 2025</div>
                     <h2 class="post-title">Advancing Healthcare with AI: The MedVisual Journey</h2>
                     <p class="post-excerpt">Exploring how we're revolutionizing medical report visualization using artificial intelligence and making healthcare more accessible for everyone...</p>
@@ -332,7 +352,7 @@
                     </div>
                 </article>
 
-                <article class="blog-post">
+                <article class="blog-post" style="animation-delay: 0.8s;">
                     <div class="post-date">February 8, 2025</div>
                     <h2 class="post-title">From Arduino to AI: My Journey in Robotics</h2>
                     <p class="post-excerpt">Looking back at my beginnings with Arduino, and how that sparked a passion for robotics and artificial intelligence that led to where I am today...</p>
@@ -343,7 +363,7 @@
                     </div>
                 </article>
 
-                <article class="blog-post">
+                <article class="blog-post" style="animation-delay: 1s;">
                     <div class="post-date">January 30, 2025</div>
                     <h2 class="post-title">Building Award-Winning Projects: Hackathon Success Stories</h2>
                     <p class="post-excerpt">Sharing experiences and lessons learned from participating in national and international hackathons, and how they shaped my approach to innovation...</p>

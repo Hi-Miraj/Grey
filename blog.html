@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Miraj's Blog</title>
     <style>
-        /* Base styles */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
         body {
-            background-color: #181818;
+            background-color: #0a0a0a;
             color: #fff;
             font-family: 'Inter', Arial, sans-serif;
             margin: 0;
@@ -24,13 +25,12 @@
             flex-grow: 1;
         }
 
-        /* Header styles */
         .header-container {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            background-color: rgba(24, 24, 24, 0.95);
+            background-color: rgba(10, 10, 10, 0.95);
             padding: 20px;
             backdrop-filter: blur(10px);
             z-index: 1000;
@@ -49,17 +49,14 @@
             font-size: 24px;
             font-weight: bold;
             color: #ff0055;
-            cursor: pointer;
-            transition: all 0.3s ease-in-out;
             text-decoration: none;
+            transition: all 0.3s ease;
         }
 
         .logo:hover {
             text-shadow: 0 0 20px rgba(255, 0, 85, 0.5);
-            transform: scale(1.05);
         }
 
-        /* Navigation styles */
         .nav-links {
             display: flex;
             gap: 30px;
@@ -71,17 +68,18 @@
             font-size: 16px;
             position: relative;
             padding: 5px 0;
+            transition: color 0.3s ease;
         }
 
         .nav-links a::after {
             content: '';
             position: absolute;
-            bottom: 0;
+            bottom: -2px;
             left: 0;
             width: 0;
             height: 2px;
             background-color: #ff0055;
-            transition: width 0.3s ease-in-out;
+            transition: width 0.3s ease;
         }
 
         .nav-links a:hover {
@@ -92,7 +90,6 @@
             width: 100%;
         }
 
-        /* Blog specific styles */
         .main-content {
             margin-top: 120px;
             display: grid;
@@ -110,8 +107,7 @@
             color: transparent;
             margin-bottom: 50px;
             grid-column: 1 / -1;
-            opacity: 0; /* Initially hidden */
-            animation: fadeInUp 1s ease-out 0.5s forwards; /* Animation */
+            animation: fadeIn 1s ease-out;
         }
 
         .blog-posts {
@@ -121,31 +117,19 @@
         }
 
         .blog-post {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
+            background: rgba(255, 0, 85, 0.05);
+            border-radius: 12px;
             padding: 30px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.3s ease;
             cursor: pointer;
             position: relative;
-            overflow: hidden;
-            opacity: 0; /* Initially hidden */
-            animation: fadeInUp 1s ease-out forwards; /* Animation */
+            border: 1px solid rgba(255, 0, 85, 0.1);
+            animation: fadeIn 1s ease-out;
         }
 
         .blog-post:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .blog-post::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: linear-gradient(to bottom, #ff0055, #ff4081);
-            border-radius: 4px;
+            background: rgba(255, 0, 85, 0.1);
         }
 
         .post-date {
@@ -161,7 +145,7 @@
         }
 
         .post-excerpt {
-            color: #ccc;
+            color: #aaa;
             line-height: 1.6;
             margin-bottom: 20px;
         }
@@ -180,30 +164,34 @@
             font-size: 14px;
         }
 
-        /* Sidebar styles */
         .sidebar {
             position: sticky;
             top: 120px;
             height: fit-content;
-            opacity: 0; /* Initially hidden */
-            animation: fadeInUp 1s ease-out 1s forwards; /* Animation */
         }
 
         .search-box {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 5px;
-            padding: 10px;
+            background: rgba(255, 0, 85, 0.05);
+            border: 1px solid rgba(255, 0, 85, 0.1);
+            border-radius: 12px;
+            padding: 12px;
             width: 100%;
             color: #fff;
             margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .search-box:focus {
+            outline: none;
+            background: rgba(255, 0, 85, 0.1);
         }
 
         .categories {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
+            background: rgba(255, 0, 85, 0.05);
+            border-radius: 12px;
             padding: 20px;
             margin-bottom: 30px;
+            border: 1px solid rgba(255, 0, 85, 0.1);
         }
 
         .categories h3 {
@@ -222,68 +210,48 @@
         }
 
         .category-list a {
-            color: #ccc;
+            color: #aaa;
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         .category-list a:hover {
             color: #ff0055;
         }
 
-        /* Footer styles */
         .footer {
-            margin-top: 100px;
+            margin-top: auto;
             padding: 40px 0;
-            text-align: center;
-            background-color: rgba(255, 255, 255, 0.05);
-            opacity: 0; /* Initially hidden */
-            animation: fadeInUp 1s ease-out 1.2s forwards; /* Animation */
+            background-color: rgba(255, 255, 255, 0.02);
         }
 
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 30px;
-            margin-bottom: 20px;
+            gap: 20px;
+            flex-wrap: wrap;
         }
 
         .social-links a {
             color: #aaa;
             text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            transition: all 0.3s ease-in-out;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .social-links a::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(255, 0, 85, 0.1);
-            transform: translateX(-100%);
-            transition: transform 0.3s ease-in-out;
-            z-index: -1;
+            padding: 12px 24px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+            font-size: 15px;
         }
 
         .social-links a:hover {
             color: #fff;
+            background: rgba(255, 0, 85, 0.2);
+            transform: translateY(-2px);
         }
 
-        .social-links a:hover::before {
-            transform: translateX(0);
-        }
-
-        /* Animation keyframes */
-        @keyframes fadeInUp {
+        @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(10px);
             }
             to {
                 opacity: 1;
@@ -291,7 +259,6 @@
             }
         }
 
-        /* Responsive design */
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
@@ -316,10 +283,6 @@
             .blog-title {
                 font-size: 36px;
             }
-
-            .social-links {
-                flex-wrap: wrap;
-            }
         }
     </style>
 </head>
@@ -341,7 +304,7 @@
             <h1 class="blog-title">Blog</h1>
 
             <div class="blog-posts">
-                <article class="blog-post" style="animation-delay: 0.6s;">
+                <article class="blog-post">
                     <div class="post-date">February 15, 2025</div>
                     <h2 class="post-title">Advancing Healthcare with AI: The MedVisual Journey</h2>
                     <p class="post-excerpt">Exploring how we're revolutionizing medical report visualization using artificial intelligence and making healthcare more accessible for everyone...</p>
@@ -352,7 +315,7 @@
                     </div>
                 </article>
 
-                <article class="blog-post" style="animation-delay: 0.8s;">
+                <article class="blog-post">
                     <div class="post-date">February 8, 2025</div>
                     <h2 class="post-title">From Arduino to AI: My Journey in Robotics</h2>
                     <p class="post-excerpt">Looking back at my beginnings with Arduino, and how that sparked a passion for robotics and artificial intelligence that led to where I am today...</p>
@@ -363,7 +326,7 @@
                     </div>
                 </article>
 
-                <article class="blog-post" style="animation-delay: 1s;">
+                <article class="blog-post">
                     <div class="post-date">January 30, 2025</div>
                     <h2 class="post-title">Building Award-Winning Projects: Hackathon Success Stories</h2>
                     <p class="post-excerpt">Sharing experiences and lessons learned from participating in national and international hackathons, and how they shaped my approach to innovation...</p>

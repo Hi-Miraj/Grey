@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miraj's Blog</title>
+    <style>
+        /* Base styles remain the same */
+        body {
+            background-color: #181818;
+            color: #fff;
+            font-family: 'Inter', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px;
+            flex-grow: 1;
+        }
+
+        /* Header styles */
+        .header-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(24, 24, 24, 0.95);
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 0, 85, 0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff0055;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            text-decoration: none;
+        }
+
+        .logo:hover {
+            text-shadow: 0 0 20px rgba(255, 0, 85, 0.5);
+            transform: scale(1.05);
+        }
+
+        /* Navigation */
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 16px;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ff0055;
+            transition: width 0.3s ease-in-out;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Main content */
+        .main-content {
+            margin-top: 120px;
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 40px;
+        }
+
+        .blog-title {
+            font-size: 48px;
+            font-weight: bold;
+            text-align: left;
+            background: linear-gradient(45deg, #ff0055, #ff4081);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 50px;
+            grid-column: 1 / -1;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        .blog-posts {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .blog-post {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        .blog-post:nth-child(1) { animation-delay: 0.3s; }
+        .blog-post:nth-child(2) { animation-delay: 0.6s; }
+        .blog-post:nth-child(3) { animation-delay: 0.9s; }
+
+        .blog-post:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .post-date {
+            color: #ff0055;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .post-title {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .post-excerpt {
+            color: #ccc;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .post-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: rgba(255, 0, 85, 0.1);
+            color: #ff0055;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: sticky;
+            top: 120px;
+            height: fit-content;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease-out 1.2s forwards;
+        }
+
+        .search-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            padding: 10px;
+            width: 100%;
+            color: #fff;
+            margin-bottom: 30px;
+        }
+
+        .categories {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .categories h3 {
+            color: #ff0055;
+            margin-bottom: 15px;
+        }
+
+        .category-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .category-list li {
+            margin-bottom: 10px;
+        }
+
+        .category-list a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .category-list a:hover {
+            color: #ff0055;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 100px;
+            padding: 40px 0;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .social-links a {
+            color: #aaa;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: all 0.3s ease-in-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 0, 85, 0.1);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+            z-index: -1;
+        }
+
+        .social-links a:hover {
+            color: #fff;
+        }
+
+        .social-links a:hover::before {
+            transform: translateX(0);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .main-content {
+                margin-top: 180px;
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: static;
+                margin-top: 40px;
+            }
+
+            .blog-title {
+                font-size: 36px;
+            }
+
+            .social-links {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header-container">
+        <div class="header-content">
+            <a href="index.html" class="logo">Miraj</a>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="#">Blog</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <main class="main-content">
+            <h1 class="blog-title">Blog</h1>
+
+            <div class="blog-posts">
+                <article class="blog-post">
+                    <div class="post-date">February 15, 2025</div>
+                    <h2 class="post-title">Advancing Healthcare with AI: The MedVisual Journey</h2>
+                    <p class="post-excerpt">Exploring how we're revolutionizing medical report visualization using artificial intelligence and making healthcare more accessible for everyone...</p>
+                    <div class="post-tags">
+                        <span class="tag">AI</span>
+                        <span class="tag">Healthcare</span>
+                        <span class="tag">Innovation</span>
+                    </div>
+                </article>
+
+                <article class="blog-post">
+                    <div class="post-date">February 8, 2025</div>
+                    <h2 class="post-title">From Arduino to AI: My Journey in Robotics</h2>
+                    <p class="post-excerpt">Looking back at my beginnings with Arduino, and how that sparked a passion for robotics and artificial intelligence that led to where I am today...</p>
+                    <div class="post-tags">
+                        <span class="tag">Robotics</span>
+                        <span class="tag">Programming</span>
+                        <span class="tag">Personal</span>
+                    </div>
+                </article>
+
+                <article class="blog-post">
+                    <div class="post-date">January 30, 2025</div>
+                    <h2 class="post-title">Building Award-Winning Projects: Hackathon Success Stories</h2>
+                    <p class="post-excerpt">Sharing experiences and lessons learned from participating in national and international hackathons, and how they shaped my approach to innovation...</p>
+                    <div class="post-tags">
+                        <span class="tag">Hackathons</span>
+                        <span class="tag">Projects</span>
+                        <span class="tag">Innovation</span>
+                    </div>
+                </article>
+            </div>
+
+            <aside class="sidebar">
+                <input type="search" placeholder="Search posts..." class="search-box">
+
+                <div class="categories">
+                    <h3>Categories</h3>
+                    <ul class="category-list">
+                        <li><a href="#">AI & Machine Learning</a></li>
+                        <li><a href="#">Healthcare Tech</a></li>
+                        <li><a href="#">Robotics</a></li>
+                        <li><a href="#">Programming</a></li>
+                        <li><a href="#">Innovation</a></li>
+                        <li><a href="#">Personal Journey</a></li>
+                    </ul>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/mirajshafek/" target="_blank">LinkedIn</a>
+            <a href="https://x.com/MirajShafek" target="_blank">X</a>
+            <a href="https://instagram.com/miraj_shafek/" target="_blank">Instagram</a>
+            <a href="https://youtube.com/@Hi-Miraj" target="_blank">YouTube</a>
+            <a href="https://github.com/yourusername" target="_blank">Github</a>
+        </div>
+    </footer>
+</body>
+</html>

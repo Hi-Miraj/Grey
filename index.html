@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miraj's Personal Website</title>
+    <style>
+        /* Base styles */
+        body {
+            background-color: #181818;
+            color: #fff;
+            font-family: 'Inter', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px;
+            flex-grow: 1;
+        }
+
+        /* Header styles */
+        .header-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(24, 24, 24, 0.95);
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 0, 85, 0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff0055;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            text-decoration: none;
+        }
+
+        .logo:hover {
+            text-shadow: 0 0 20px rgba(255, 0, 85, 0.5);
+            transform: scale(1.05);
+        }
+
+        /* Navigation styles */
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 16px;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ff0055;
+            transition: width 0.3s ease-in-out;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Main content styles */
+        .main-content {
+            margin-top: 180px;
+            text-align: center;
+        }
+
+        .title {
+            font-size: 64px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff0055, #ff4081);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        .subtitle {
+            font-size: 24px;
+            color: #ccc;
+            margin-top: 20px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1.5s ease-out forwards;
+        }
+
+        .quote {
+            font-size: 20px;
+            color: #ff0055;
+            margin-top: 40px;
+            font-style: italic;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 2s ease-out forwards;
+            position: relative;
+            display: inline-block;
+        }
+
+        .quote::before, .quote::after {
+            content: '"';
+            position: absolute;
+            font-size: 32px;
+            opacity: 0.5;
+        }
+
+        .quote::before {
+            left: -20px;
+            top: -10px;
+        }
+
+        .quote::after {
+            right: -20px;
+            bottom: -10px;
+        }
+
+        /* Footer styles */
+        .footer {
+            margin-top: 100px;
+            padding: 40px 0;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .social-links a {
+            color: #aaa;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: all 0.3s ease-in-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 0, 85, 0.1);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+            z-index: -1;
+        }
+
+        .social-links a:hover {
+            color: #fff;
+        }
+
+        .social-links a:hover::before {
+            transform: translateX(0);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .title {
+                font-size: 48px;
+            }
+
+            .subtitle {
+                font-size: 20px;
+                padding: 0 20px;
+            }
+
+            .social-links {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header-container">
+        <div class="header-content">
+            <a href="#" class="logo">Miraj</a>
+            <nav class="nav-links">
+                <a href="#">Home</a>
+                <a href="about.html">About</a>
+                <a href="blog.html">Blog</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <main class="main-content">
+            <h1 class="title">Miraj Shafek</h1>
+            <p class="subtitle">I like to make things fly, swim, go to space, and walk the earth</p>
+            <p class="quote">Machines are Better</p>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/mirajshafek/" target="_blank">LinkedIn</a>
+            <a href="https://x.com/MirajShafek" target="_blank">X</a>
+            <a href="https://instagram.com/miraj_shafek/" target="_blank">Instagram</a>
+            <a href="https://youtube.com/@Hi-Miraj" target="_blank">YouTube</a>
+            <a href="https://github.com/yourusername" target="_blank">Github</a>
+        </div>
+    </footer>
+</body>
+</html>
